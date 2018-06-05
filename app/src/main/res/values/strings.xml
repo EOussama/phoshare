@@ -12,4 +12,11 @@
     <string name="login_login_button_text">Login</string>
     <string name="login_signup_button_text">Sign up</string>
     <string name="login_forgot_my_password">I forgot my password</string>
+
+    <!-- Sign up -->
+    <string name="signup_password_confirmation_input_hint">Repeat your password</string>
+    <string name="signup_security_answer_input_hint">Provide an answer</string>
+    <string name="signup_terms_agreement">I agree with the terms of use</string>
+    <string name="signup_signup_button_text">Sign up</string>
+    <string name="signup_clear_button_text">Clear</string>
 </resources>
