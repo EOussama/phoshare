@@ -28,11 +28,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    if(etUsername.getText().toString().trim().length() <= 0) throw new Exception("Input a username first");
-                    if(etPassword.getText().toString().trim().length() <= 0) throw new Exception("Input a password first");
+                    if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_username_empty_error));
+                    if(etPassword.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_password_empty_error));
+                    if(etPassword.getText().toString().trim().length() < 5) throw new Exception(getResources().getString(R.string.login_password_short_error));
 
                     Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     LoginActivity.this.startActivity(mainIntent);
+                    LoginActivity.this.finish();
                 } catch(Exception ex) {
                     Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }

@@ -12,6 +12,9 @@
     <string name="login_login_button_text">Login</string>
     <string name="login_signup_button_text">Sign up</string>
     <string name="login_forgot_my_password">I forgot my password</string>
+    <string name="login_username_empty_error">Input a username first</string>
+    <string name="login_password_empty_error">Input a password first</string>
+    <string name="login_password_short_error">Passwords cannot has less than 5 characters</string>
 
     <!-- Sign up -->
     <string name="signup_password_confirmation_input_hint">Repeat your password</string>
@@ -20,14 +23,18 @@
     <string name="signup_signup_button_text">Sign up</string>
     <string name="signup_clear_button_text">Clear</string>
     <string-array name="signup_security_questions">
-        <item>What's your favorite color?</item>
-        <item>What was your firt pet's name?</item>
+        <item>What\'s your favorite color?</item>
+        <item>What was your firt pet\'s name?</item>
         <item>Where is your father from?</item>
-        <item>What's your favorite sport?</item>
-        <item>What's your favorite video-game character?</item>
-        <item>What's your bestfriend's name?</item>
-        <item>What's your catch-phrase?</item>
-        <item>What's your favorite anime?</item>
+        <item>What\'s your favorite sport?</item>
+        <item>What\'s your favorite video-game character?</item>
+        <item>What\'s your bestfriend\'s name?</item>
+        <item>What\'s your catch-phrase?</item>
+        <item>What\'s your favorite anime?</item>
         <item>What do you despise the most?</item>
     </string-array>
+    <string name="signup_wrong_passwords_error">Passwords don\'t match</string>
+    <string name="signup_security_answer_empty_error">Provide an answer for the security question first</string>
+    <string name="signup_terms_agreement_error">You have to agree with the erms of use</string>
+    <string name="signup_password_confirmation_empty_error">Confirm your password first</string>
 </resources>

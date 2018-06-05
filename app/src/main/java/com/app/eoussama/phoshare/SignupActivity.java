@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -29,19 +30,37 @@ public class SignupActivity extends AppCompatActivity {
         etSecurityAnswer = (EditText) this.findViewById(R.id.etSecurityAnswer);
 
         cbTerms = (CheckBox) this.findViewById(R.id.cbTerms);
-        sSecurityQuestions = (Spinner) this.findViewById(R.id.etPasswordConfirmation);
+        sSecurityQuestions = (Spinner) this.findViewById(R.id.sSecurityQuestions);
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_username_empty_error));
+                    if(etPassword.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_password_empty_error));
+                    if(etPasswordConfirmation.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.signup_password_confirmation_empty_error));
+                    if(etSecurityAnswer.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.signup_security_answer_empty_error));
+                    if(etPassword.getText().toString().trim().length() < 5) throw new Exception(getResources().getString(R.string.login_password_short_error));
+                    if(!etPassword.getText().toString().trim().equals(etPasswordConfirmation.getText().toString().trim())) throw new Exception(getResources().getString(R.string.signup_wrong_passwords_error));
+                    if(!cbTerms.isChecked()) throw new Exception(getResources().getString(R.string.signup_terms_agreement_error));
 
+
+                } catch(Exception ex) {
+                    Toast.makeText(SignupActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                etUsername.setText("");
+                etPassword.setText("");
+                etPasswordConfirmation.setText("");
+                etSecurityAnswer.setText("");
+                sSecurityQuestions.setSelection(0, true);
+                cbTerms.setChecked(false);
+                etUsername.requestFocus();
             }
         });
     }
