@@ -35,6 +35,7 @@
     </string-array>
     <string name="signup_wrong_passwords_error">Passwords don\'t match</string>
     <string name="signup_security_answer_empty_error">Provide an answer for the security question first</string>
-    <string name="signup_terms_agreement_error">You have to agree with the erms of use</string>
+    <string name="signup_terms_agreement_error">You have to agree with the terms of use</string>
     <string name="signup_password_confirmation_empty_error">Confirm your password first</string>
+    <string name="signup_registeration_success_message">You\'ve successfully signed up</string>
 </resources>

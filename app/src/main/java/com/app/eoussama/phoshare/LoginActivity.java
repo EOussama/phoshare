@@ -2,15 +2,18 @@ package com.app.eoussama.phoshare;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin, btnSignup;
+    TextView tvForgotPassword;
     EditText etUsername, etPassword;
 
     @Override
@@ -23,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
 
         etUsername = (EditText) this.findViewById(R.id.etUsername);
         etPassword = (EditText) this.findViewById(R.id.etPassword);
+
+        tvForgotPassword = (TextView) this.findViewById(R.id.tvForgotPassword);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +50,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent signupIntent = new Intent(LoginActivity.this, SignupActivity.class);
-                LoginActivity.this.startActivity(signupIntent);
+                LoginActivity.this.startActivityForResult(signupIntent, 1);
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgotPasswordIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                LoginActivity.this.startActivityForResult(forgotPasswordIntent, 2);
             }
         });
     }
