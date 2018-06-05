@@ -1,11 +1,7 @@
 ﻿<p align="center">
 	<img src="app/src/main/res/drawable/icon.png" alt="PhoShare Logo" width="150">
-
 	<h1 align="center">PhoShare</h1>
-
 </p>
-
-
 
 ##Description
 A simple offline photo sharing application for those who don't have friends 😥
