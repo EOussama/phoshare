@@ -123,14 +123,14 @@
                 android:layout_marginTop="30dp">
 
                 <Button
-                    android:id="@+id/btnLogin"
+                    android:id="@+id/btnSignup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/signup_signup_button_text"
                     android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/btnSignup"
+                    android:id="@+id/btnClear"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:hint="@string/signup_clear_button_text"
