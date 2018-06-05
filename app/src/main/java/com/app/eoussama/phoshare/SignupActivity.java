@@ -50,9 +50,7 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, getResources().getString(R.string.signup_registeration_success_message), Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
-                        public void run() {
-                            SignupActivity.this.finishActivity(1);
-                        }
+                        public void run() { SignupActivity.this.finish(); }
                     }, SIGNUP_TIMEOUT);
                 } catch(Exception ex) {
                     Toast.makeText(SignupActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();

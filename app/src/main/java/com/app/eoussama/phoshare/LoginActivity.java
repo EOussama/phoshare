@@ -2,7 +2,6 @@ package com.app.eoussama.phoshare;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Toast;
@@ -50,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent signupIntent = new Intent(LoginActivity.this, SignupActivity.class);
-                LoginActivity.this.startActivityForResult(signupIntent, 1);
+                LoginActivity.this.startActivity(signupIntent);
             }
         });
 

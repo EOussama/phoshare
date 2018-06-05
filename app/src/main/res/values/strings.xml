@@ -38,4 +38,10 @@
     <string name="signup_terms_agreement_error">You have to agree with the terms of use</string>
     <string name="signup_password_confirmation_empty_error">Confirm your password first</string>
     <string name="signup_registeration_success_message">You\'ve successfully signed up</string>
+
+    <!-- Main -->
+    <string name="main_logout">Log-out</string>
+    <string name="main_logout_confirmation_message">Do you want to log-out from your account?</string>
+    <string name="main_logout_dialog_positive_button">Yes</string>
+    <string name="main_logout_dialog_negative_button">No</string>
 </resources>
