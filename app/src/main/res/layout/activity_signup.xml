@@ -82,7 +82,8 @@
 
             <Spinner
                 android:layout_width="270dp"
-                android:layout_height="wrap_content"></Spinner>
+                android:layout_height="wrap_content"
+                android:entries="@array/signup_security_questions"/>
         </TableRow>
 
         <TableRow

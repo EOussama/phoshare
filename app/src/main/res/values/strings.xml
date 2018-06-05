@@ -19,4 +19,15 @@
     <string name="signup_terms_agreement">I agree with the terms of use</string>
     <string name="signup_signup_button_text">Sign up</string>
     <string name="signup_clear_button_text">Clear</string>
+    <string-array name="signup_security_questions">
+        <item>What's your favorite color?</item>
+        <item>What was your firt pet's name?</item>
+        <item>Where is your father from?</item>
+        <item>What's your favorite sport?</item>
+        <item>What's your favorite video-game character?</item>
+        <item>What's your bestfriend's name?</item>
+        <item>What's your catch-phrase?</item>
+        <item>What's your favorite anime?</item>
+        <item>What do you despise the most?</item>
+    </string-array>
 </resources>
