@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String PASSWORD_FORGOTTEN_USERNAME_PARAM = "com.app.eoussama.phoshare.PASSWORD_FORGOTTEN_USERNAME_PARAM";
+
     Button btnLogin, btnSignup;
     TextView tvForgotPassword;
     EditText etUsername, etPassword;
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_username_empty_error));
                     if(etPassword.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_password_empty_error));
                     if(etPassword.getText().toString().trim().length() < 5) throw new Exception(getResources().getString(R.string.login_password_short_error));
+                    //if() throw new Exception(); TODO - Check if the username or password is correct
 
                     Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     LoginActivity.this.startActivity(mainIntent);
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent forgotPasswordIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                forgotPasswordIntent.putExtra(PASSWORD_FORGOTTEN_USERNAME_PARAM, etUsername.getText().toString().trim());
                 LoginActivity.this.startActivityForResult(forgotPasswordIntent, 2);
             }
         });

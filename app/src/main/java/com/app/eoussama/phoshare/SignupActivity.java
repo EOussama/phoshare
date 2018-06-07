@@ -46,6 +46,7 @@ public class SignupActivity extends AppCompatActivity {
                     if(!etPassword.getText().toString().trim().equals(etPasswordConfirmation.getText().toString().trim())) throw new Exception(getResources().getString(R.string.signup_wrong_passwords_error));
                     if(etSecurityAnswer.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.signup_security_answer_empty_error));
                     if(!cbTerms.isChecked()) throw new Exception(getResources().getString(R.string.signup_terms_agreement_error));
+                    // TODO - Check of the username already exists
 
                     Toast.makeText(SignupActivity.this, getResources().getString(R.string.signup_registeration_success_message), Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {

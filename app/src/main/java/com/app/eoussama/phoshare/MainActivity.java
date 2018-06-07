@@ -13,7 +13,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /*
     @Override
+    TODO - Logout confirmation
+
     public void onPause() {
         super.onPause();
 
@@ -36,5 +39,5 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
+    }*/
 }

@@ -15,6 +15,7 @@
     <string name="login_username_empty_error">Input a username first</string>
     <string name="login_password_empty_error">Input a password first</string>
     <string name="login_password_short_error">Passwords cannot has less than 5 characters</string>
+    <string name="login_invalid_username_error">Invalid username</string>
 
     <!-- Sign up -->
     <string name="signup_password_confirmation_input_hint">Repeat your password</string>
@@ -24,11 +25,11 @@
     <string name="signup_clear_button_text">Clear</string>
     <string-array name="signup_security_questions">
         <item>What\'s your favorite color?</item>
-        <item>What was your firt pet\'s name?</item>
+        <item>What was your first pet\'s name?</item>
         <item>Where is your father from?</item>
         <item>What\'s your favorite sport?</item>
         <item>What\'s your favorite video-game character?</item>
-        <item>What\'s your bestfriend\'s name?</item>
+        <item>What\'s your best friend\'s name?</item>
         <item>What\'s your catch-phrase?</item>
         <item>What\'s your favorite anime?</item>
         <item>What do you despise the most?</item>
@@ -44,4 +45,8 @@
     <string name="main_logout_confirmation_message">Do you want to log-out from your account?</string>
     <string name="main_logout_dialog_positive_button">Yes</string>
     <string name="main_logout_dialog_negative_button">No</string>
+
+    <!-- Forgot my Password -->
+    <string name="forgot_password_next_button_next_text">Next</string>
+    <string name="forgot_password_restore_button_next_text">Restore my password</string>
 </resources>
