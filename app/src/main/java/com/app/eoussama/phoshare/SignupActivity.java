@@ -39,6 +39,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    Connection conn = new Connection(SignupActivity.this);
+
                     if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_username_empty_error));
                     if(etPassword.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_password_empty_error));
                     if(etPassword.getText().toString().trim().length() < 5) throw new Exception(getResources().getString(R.string.login_password_short_error));
@@ -46,8 +48,9 @@ public class SignupActivity extends AppCompatActivity {
                     if(!etPassword.getText().toString().trim().equals(etPasswordConfirmation.getText().toString().trim())) throw new Exception(getResources().getString(R.string.signup_wrong_passwords_error));
                     if(etSecurityAnswer.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.signup_security_answer_empty_error));
                     if(!cbTerms.isChecked()) throw new Exception(getResources().getString(R.string.signup_terms_agreement_error));
-                    // TODO - Check of the username already exists
+                    if(conn.isValidUsername(etUsername.getText().toString().trim())) throw new Exception(getResources().getString(R.string.signup_valid_user_error));
 
+                    // TODO - Register username in the database
                     Toast.makeText(SignupActivity.this, getResources().getString(R.string.signup_registeration_success_message), Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override

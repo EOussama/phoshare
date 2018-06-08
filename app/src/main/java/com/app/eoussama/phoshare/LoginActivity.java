@@ -1,5 +1,6 @@
 package com.app.eoussama.phoshare;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,10 +35,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    Connection conn = new Connection(LoginActivity.this);
+
                     if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_username_empty_error));
                     if(etPassword.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_password_empty_error));
                     if(etPassword.getText().toString().trim().length() < 5) throw new Exception(getResources().getString(R.string.login_password_short_error));
-                    //if() throw new Exception(); TODO - Check if the username or password is correct
+                    if(!conn.isValidUsername(etUsername.getText().toString().trim())) throw new Exception(getResources().getString(R.string.login_invalid_user_error));
+
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_login_success_message), Toast.LENGTH_SHORT).show();
 
                     Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     LoginActivity.this.startActivity(mainIntent);

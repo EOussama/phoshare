@@ -16,6 +16,8 @@
     <string name="login_password_empty_error">Input a password first</string>
     <string name="login_password_short_error">Passwords cannot has less than 5 characters</string>
     <string name="login_invalid_username_error">Invalid username</string>
+    <string name="login_invalid_user_error">This username is invalid</string>
+    <string name="login_login_success_message">You\'ve successfully logged in</string>
 
     <!-- Sign up -->
     <string name="signup_password_confirmation_input_hint">Repeat your password</string>
@@ -39,6 +41,7 @@
     <string name="signup_terms_agreement_error">You have to agree with the terms of use</string>
     <string name="signup_password_confirmation_empty_error">Confirm your password first</string>
     <string name="signup_registeration_success_message">You\'ve successfully signed up</string>
+    <string name="signup_valid_user_error">This username already exists</string>
 
     <!-- Main -->
     <string name="main_logout">Log-out</string>
