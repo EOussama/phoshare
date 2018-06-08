@@ -1,9 +1,16 @@
 package com.app.eoussama.phoshare;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.security.SecureRandom;
+import java.sql.Date;
+import java.util.HashMap;
 
 public class Connection extends SQLiteOpenHelper {
     private final String TABLE_USERS = "users", TABLE_POSTS = "posts", TABLE_COMMENTS = "comments", TABLE_FAVORITES = "favorites";
@@ -27,6 +34,7 @@ public class Connection extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(String.format("DROP TABLE %s", TABLE_USERS));
+
         db.execSQL(String.format("DROP TABLE %s", TABLE_POSTS));
         db.execSQL(String.format("DROP TABLE %s", TABLE_COMMENTS));
         db.execSQL(String.format("DROP TABLE %s", TABLE_FAVORITES));
@@ -39,5 +47,20 @@ public class Connection extends SQLiteOpenHelper {
         cursor.close();
 
         return valid;
+    }
+
+    public void RegisterUser(HashMap<String, String> user) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_USERS_USERNAME, user.get("username"));
+        values.put(COL_USERS_PASSWORD, user.get("password")); // TODO - hashing algorithm, preferably "Whirlpool"
+        values.put(COL_USERS_SALT, ""); // TODO - auto generate a salt
+        values.put(COL_USERS_SECURITY_QUESTION, user.get("security_question"));
+        values.put(COL_USERS_SECURITY_ANSWER, user.get("security_answer"));
+        values.put(COL_USERS_JOIN_DATE, ""); // TODO - Get a string formatted date
+
+        db.insert(TABLE_USERS, null, values);
+        db.close();
     }
 }

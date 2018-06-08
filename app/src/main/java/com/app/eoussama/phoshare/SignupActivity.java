@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class SignupActivity extends AppCompatActivity {
 
     private final int SIGNUP_TIMEOUT = 2500;
@@ -40,7 +42,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     Connection conn = new Connection(SignupActivity.this);
-
+                    HashMap<String, String> user = new HashMap<String, String>();
                     if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_username_empty_error));
                     if(etPassword.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_password_empty_error));
                     if(etPassword.getText().toString().trim().length() < 5) throw new Exception(getResources().getString(R.string.login_password_short_error));
@@ -50,7 +52,12 @@ public class SignupActivity extends AppCompatActivity {
                     if(!cbTerms.isChecked()) throw new Exception(getResources().getString(R.string.signup_terms_agreement_error));
                     if(conn.isValidUsername(etUsername.getText().toString().trim())) throw new Exception(getResources().getString(R.string.signup_valid_user_error));
 
-                    // TODO - Register username in the database
+                    user.put("username", etUsername.getText().toString().trim());
+                    user.put("password", etPassword.getText().toString().trim());
+                    user.put("security_question", sSecurityQuestions.getSelectedItem().toString().trim());
+                    user.put("security_answer", etSecurityAnswer.getText().toString().trim());
+                    conn.RegisterUser(user);
+
                     Toast.makeText(SignupActivity.this, getResources().getString(R.string.signup_registeration_success_message), Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
