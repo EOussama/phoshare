@@ -5,12 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import java.security.SecureRandom;
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 public class Connection extends SQLiteOpenHelper {
     private final String TABLE_USERS = "users", TABLE_POSTS = "posts", TABLE_COMMENTS = "comments", TABLE_FAVORITES = "favorites";
@@ -52,15 +52,46 @@ public class Connection extends SQLiteOpenHelper {
     public void RegisterUser(HashMap<String, String> user) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+        String salt = jPasswords.Generate(128, null);
 
         values.put(COL_USERS_USERNAME, user.get("username"));
-        values.put(COL_USERS_PASSWORD, user.get("password")); // TODO - hashing algorithm, preferably "Whirlpool"
-        values.put(COL_USERS_SALT, ""); // TODO - auto generate a salt
+        values.put(COL_USERS_PASSWORD, jPasswords.Hash(user.get("password"), salt, -1));
+        values.put(COL_USERS_SALT, salt);
         values.put(COL_USERS_SECURITY_QUESTION, user.get("security_question"));
         values.put(COL_USERS_SECURITY_ANSWER, user.get("security_answer"));
         values.put(COL_USERS_JOIN_DATE, ""); // TODO - Get a string formatted date
 
         db.insert(TABLE_USERS, null, values);
         db.close();
+    }
+
+    public static String formatDateTime(Context context, String timeToFormat) {
+
+        String finalDateTime = "";
+
+        SimpleDateFormat iso8601Format = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss");
+
+        Date date = null;
+        if (timeToFormat != null) {
+            try {
+                date = iso8601Format.parse(timeToFormat);
+            } catch (ParseException e) {
+                date = null;
+            }
+
+            if (date != null) {
+                long when = date.getTime();
+                int flags = 0;
+                flags |= android.text.format.DateUtils.FORMAT_SHOW_TIME;
+                flags |= android.text.format.DateUtils.FORMAT_SHOW_DATE;
+                flags |= android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
+                flags |= android.text.format.DateUtils.FORMAT_SHOW_YEAR;
+
+                finalDateTime = android.text.format.DateUtils.formatDateTime(context,
+                        when + TimeZone.getDefault().getOffset(when), flags);
+            }
+        }
+        return finalDateTime;
     }
 }
