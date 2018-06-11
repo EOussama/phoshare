@@ -6,11 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.TimeZone;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class Connection extends SQLiteOpenHelper {
     private final String TABLE_USERS = "users", TABLE_POSTS = "posts", TABLE_COMMENTS = "comments", TABLE_FAVORITES = "favorites";
@@ -42,56 +41,48 @@ public class Connection extends SQLiteOpenHelper {
 
     public boolean isValidUsername(String username) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(String.format("SELECT %s FROM %s WHERE %s = '%s'", COL_USERS_ID, TABLE_USERS, COL_USERS_USERNAME, username) ,null);
+        Cursor cursor = db.rawQuery(String.format("SELECT %s FROM %s WHERE %s = '%s'", COL_USERS_ID, TABLE_USERS, COL_USERS_USERNAME, username), null);
         boolean valid = cursor.moveToFirst();
         cursor.close();
 
         return valid;
     }
 
+    public boolean isPasswordCorrect(String password, String username) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(String.format("SELECT %s FROM %s WHERE %s = '%s' AND %s = '%s'", COL_USERS_ID, TABLE_USERS, COL_USERS_USERNAME, username, COL_USERS_PASSWORD, jPasswords.Hash(password, getUserSalt(username), -1)), null);
+        boolean valid = cursor.moveToFirst();
+        cursor.close();
+
+        return valid;
+    }
+
+    private String getUserSalt(String username) {
+        String salt = "";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(String.format("SELECT %s FROM %s WHERE %s = '%s'", COL_USERS_SALT, TABLE_USERS, COL_USERS_USERNAME, username), null);
+
+        if(cursor.moveToFirst()) salt = cursor.getString(0);
+        cursor.close();
+
+        return salt;
+    }
+
     public void RegisterUser(HashMap<String, String> user) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         String salt = jPasswords.Generate(128, null);
-
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss", Locale.UK);
+        // TODO - Escape the quote marks in the hashes and salts
         values.put(COL_USERS_USERNAME, user.get("username"));
         values.put(COL_USERS_PASSWORD, jPasswords.Hash(user.get("password"), salt, -1));
         values.put(COL_USERS_SALT, salt);
         values.put(COL_USERS_SECURITY_QUESTION, user.get("security_question"));
         values.put(COL_USERS_SECURITY_ANSWER, user.get("security_answer"));
-        values.put(COL_USERS_JOIN_DATE, ""); // TODO - Get a string formatted date
+        values.put(COL_USERS_JOIN_DATE, sdf.format(date));
 
         db.insert(TABLE_USERS, null, values);
         db.close();
-    }
-
-    public static String formatDateTime(Context context, String timeToFormat) {
-
-        String finalDateTime = "";
-
-        SimpleDateFormat iso8601Format = new SimpleDateFormat(
-                "yyyy-MM-dd HH:mm:ss");
-
-        Date date = null;
-        if (timeToFormat != null) {
-            try {
-                date = iso8601Format.parse(timeToFormat);
-            } catch (ParseException e) {
-                date = null;
-            }
-
-            if (date != null) {
-                long when = date.getTime();
-                int flags = 0;
-                flags |= android.text.format.DateUtils.FORMAT_SHOW_TIME;
-                flags |= android.text.format.DateUtils.FORMAT_SHOW_DATE;
-                flags |= android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
-                flags |= android.text.format.DateUtils.FORMAT_SHOW_YEAR;
-
-                finalDateTime = android.text.format.DateUtils.formatDateTime(context,
-                        when + TimeZone.getDefault().getOffset(when), flags);
-            }
-        }
-        return finalDateTime;
     }
 }

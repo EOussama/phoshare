@@ -16,7 +16,7 @@
     <string name="login_password_empty_error">Input a password first</string>
     <string name="login_password_short_error">Passwords cannot has less than 5 characters</string>
     <string name="login_invalid_username_error">Invalid username</string>
-    <string name="login_invalid_user_error">This username is invalid</string>
+    <string name="login_invalid_password_error">Password incorrect</string>
     <string name="login_login_success_message">You\'ve successfully logged in</string>
 
     <!-- Sign up -->

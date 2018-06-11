@@ -40,7 +40,8 @@ public class LoginActivity extends AppCompatActivity {
                     if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_username_empty_error));
                     if(etPassword.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.login_password_empty_error));
                     if(etPassword.getText().toString().trim().length() < 5) throw new Exception(getResources().getString(R.string.login_password_short_error));
-                    if(!conn.isValidUsername(etUsername.getText().toString().trim())) throw new Exception(getResources().getString(R.string.login_invalid_user_error));
+                    if(!conn.isValidUsername(etUsername.getText().toString().trim())) throw new Exception(getResources().getString(R.string.login_invalid_username_error));
+                    if(!conn.isPasswordCorrect(etPassword.getText().toString().trim(), etUsername.getText().toString().trim())) throw new Exception(getResources().getString(R.string.login_invalid_password_error));
 
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_login_success_message), Toast.LENGTH_SHORT).show();
 
