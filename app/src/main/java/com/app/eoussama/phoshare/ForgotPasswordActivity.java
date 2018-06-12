@@ -29,8 +29,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    Connection conn = new Connection(ForgotPasswordActivity.this);
+
                     if(etUsername.getText().toString().trim().length() <= 0) throw new Exception(ForgotPasswordActivity.this.getResources().getString(R.string.login_username_empty_error));
-                    //if() throw new Exception(ForgotPasswordActivity.this.getResources().getString(R.string.login_invalid_username_error)); TODO - Check if the username exists
+                    if(!conn.isValidUsername(etUsername.getText().toString().trim())) throw new Exception(getResources().getString(R.string.login_invalid_username_error));
 
                     Intent forgotPasswordNextIntent = new Intent(ForgotPasswordActivity.this, ForgotPasswordNextActivity.class);
                     forgotPasswordNextIntent.putExtra(PASSWORD_FORGOTTEN_NEXT_USERNAME_PARAM, etUsername.getText().toString().trim());

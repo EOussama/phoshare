@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class ForgotPasswordNextActivity extends AppCompatActivity {
 
-
     Button btnRestore;
     TextView tvSecurityQuestion;
     EditText etSecurityAnswer;
@@ -19,25 +18,26 @@ public class ForgotPasswordNextActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password_next);
 
         btnRestore = (Button) this.findViewById(R.id.btnRestore);
         etSecurityAnswer = (EditText) this.findViewById(R.id.etSecurityAnswer);
         tvSecurityQuestion = (TextView) this.findViewById(R.id.tvSecurityQuestion);
 
-        /*
-        TODO - Set the security question here
-        tvSecurityQuestion.setText(getIntent().getExtras().getString());
-        */
+        Connection conn = new Connection(ForgotPasswordNextActivity.this);
+        final String username = getIntent().getExtras().getString(ForgotPasswordActivity.PASSWORD_FORGOTTEN_NEXT_USERNAME_PARAM);
+        final String securityQuestion = conn.getUserSecurityQuestion(username);
+        final String securityAnswer = conn.getUserSecurityAnswer(username);
+        tvSecurityQuestion.setText(securityQuestion);
 
+        setContentView(R.layout.activity_forgot_password_next);
         btnRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     if(etSecurityAnswer.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.signup_security_answer_empty_error));
-                    //if() throw new Exception(); TODO - Check if the answer is correct
+                    if(!etSecurityAnswer.getText().toString().trim().equals(securityAnswer)) throw new Exception();
 
-                    // TODO - Display the password in an AlertDialog
+                    // TODO - Open password recovery Intent
                 } catch(Exception ex) {
                     Toast.makeText(ForgotPasswordNextActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }

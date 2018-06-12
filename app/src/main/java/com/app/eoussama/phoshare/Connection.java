@@ -68,6 +68,28 @@ public class Connection extends SQLiteOpenHelper {
         return salt;
     }
 
+    public String getUserSecurityQuestion(String username) {
+        String securityQuestion = "";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(String.format("SELECT %s FROM %s WHERE %s = '%s'", COL_USERS_SECURITY_QUESTION, TABLE_USERS, COL_USERS_USERNAME, username), null);
+
+        if(cursor.moveToFirst()) securityQuestion = cursor.getString(0);
+        cursor.close();
+
+        return securityQuestion;
+    }
+
+    public String getUserSecurityAnswer(String username) {
+        String securityAnswer = "";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(String.format("SELECT %s FROM %s WHERE %s = '%s'", COL_USERS_SECURITY_ANSWER, TABLE_USERS, COL_USERS_USERNAME, username), null);
+
+        if(cursor.moveToFirst()) securityAnswer = cursor.getString(0);
+        cursor.close();
+
+        return securityAnswer;
+    }
+
     public void RegisterUser(HashMap<String, String> user) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
