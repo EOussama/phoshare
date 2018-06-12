@@ -33,6 +33,7 @@ public abstract class jPasswords {
             Random rand = new Random();
 
             __character = __character > 126 || __character < 32 ? (char)jPasswords.OverWrap((int)__character, 126, 32) : __character;
+            __character = __character == '\'' || __character == '"' ? '_' : __character;
             __hashedString.setCharAt(count, __character);
         }
 

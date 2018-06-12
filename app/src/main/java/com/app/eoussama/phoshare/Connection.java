@@ -74,7 +74,7 @@ public class Connection extends SQLiteOpenHelper {
         String salt = jPasswords.Generate(128, null);
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss", Locale.UK);
-        // TODO - Escape the quote marks in the hashes and salts
+
         values.put(COL_USERS_USERNAME, user.get("username"));
         values.put(COL_USERS_PASSWORD, jPasswords.Hash(user.get("password"), salt, -1));
         values.put(COL_USERS_SALT, salt);
