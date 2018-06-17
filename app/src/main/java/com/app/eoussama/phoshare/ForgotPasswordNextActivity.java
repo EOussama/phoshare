@@ -18,10 +18,11 @@ public class ForgotPasswordNextActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_forgot_password_next);
 
-        btnRestore = (Button) this.findViewById(R.id.btnRestore);
-        etSecurityAnswer = (EditText) this.findViewById(R.id.etSecurityAnswer);
-        tvSecurityQuestion = (TextView) this.findViewById(R.id.tvSecurityQuestion);
+        btnRestore = (Button) this.findViewById(R.id.btnRestoreRecover);
+        etSecurityAnswer = (EditText) this.findViewById(R.id.etSecurityAnswerRecover);
+        tvSecurityQuestion = (TextView) this.findViewById(R.id.tvSecurityQuestionRecover);
 
         Connection conn = new Connection(ForgotPasswordNextActivity.this);
         final String username = getIntent().getExtras().getString(ForgotPasswordActivity.PASSWORD_FORGOTTEN_NEXT_USERNAME_PARAM);
@@ -29,13 +30,12 @@ public class ForgotPasswordNextActivity extends AppCompatActivity {
         final String securityAnswer = conn.getUserSecurityAnswer(username);
         tvSecurityQuestion.setText(securityQuestion);
 
-        setContentView(R.layout.activity_forgot_password_next);
         btnRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     if(etSecurityAnswer.getText().toString().trim().length() <= 0) throw new Exception(getResources().getString(R.string.signup_security_answer_empty_error));
-                    if(!etSecurityAnswer.getText().toString().trim().equals(securityAnswer)) throw new Exception();
+                    if(!etSecurityAnswer.getText().toString().trim().equals(securityAnswer)) throw new Exception(getResources().getString(R.string.forgot_password_security_question_error));
 
                     // TODO - Open password recovery Intent
                 } catch(Exception ex) {

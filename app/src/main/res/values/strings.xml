@@ -52,4 +52,5 @@
     <!-- Forgot my Password -->
     <string name="forgot_password_next_button_next_text">Next</string>
     <string name="forgot_password_restore_button_next_text">Restore my password</string>
+    <string name="forgot_password_security_question_error">Invalid answer</string>
 </resources>
